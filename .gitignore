@@ -1,0 +1,5 @@
+.vscode
+.vs
+node_modules
+babel-dist/@babel
+.DS_Store
