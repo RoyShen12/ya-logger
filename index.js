@@ -3,6 +3,7 @@ try {
 } catch (e) {}
 
 const fs = require('fs')
+const path = require('path')
 const util = require('util')
 
 const _ = require('lodash')
@@ -119,7 +120,7 @@ function initNewLogger(loggerName, logfilePath, logFileNameHead, logFileNameTail
 
   if (loggersCached.has(loggerName)) return null
 
-  if (zipOldFiles) fs.existsSync(logfilePath + 'lagecy') || fs.mkdirSync(logfilePath + 'lagecy', { recursive: true })
+  if (zipOldFiles) fs.existsSync(path.resolve(logfilePath, 'lagecy')) || fs.mkdirSync(path.resolve(logfilePath, 'lagecy'), { recursive: true })
   else fs.existsSync(logfilePath) || fs.mkdirSync(logfilePath, { recursive: true })
 
   filesOfLogger.set(loggerName, []) // init file record map
@@ -145,7 +146,7 @@ function initNewLogger(loggerName, logfilePath, logFileNameHead, logFileNameTail
           ])
 
           // ./log/verbose-2019-08-12.log -> ./log/lagecy/verbose-2019-08-12.log.gz
-          const destination = logfilePath + 'lagecy/' + _.trimStart(oldFileName, logfilePath) + '.gz'
+          const destination = path.resolve(logfilePath, 'lagecy', _.trimStart(oldFileName, logfilePath) + '.gz')
           await fs.promises.writeFile(destination, gZipedOldFileBuffer)
         } catch (err) {
           dumpRawError(err, `logger, caught while old file being archived, target file symbol: ${fList}`)
@@ -157,7 +158,7 @@ function initNewLogger(loggerName, logfilePath, logFileNameHead, logFileNameTail
   }
 
   function fileNameGenerator() {
-    const fileName = logfilePath + logFileNameHead + timebasedFileNamer() + logFileNameTail
+    const fileName = path.resolve(logfilePath, logFileNameHead + timebasedFileNamer() + logFileNameTail)
 
     if (filesOfLogger.get(loggerName).findIndex(fpath => fpath === fileName) === -1) {
       filesOfLogger.get(loggerName).push(fileName)

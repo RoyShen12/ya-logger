@@ -1,6 +1,6 @@
 {
   "name": "ya-node-logger",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "yet another node.js logger",
   "main": "index.js",
   "scripts": {},
