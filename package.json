@@ -1,10 +1,10 @@
 {
-  "name": "ya-logger",
+  "name": "ya-node-logger",
   "version": "0.0.1",
   "description": "yet another node.js logger",
   "main": "index.js",
   "scripts": {},
-  "author": "",
+  "author": "royshen12",
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",
