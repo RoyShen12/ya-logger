@@ -3,7 +3,7 @@
 # Usage
 
 ``` js
-const logger = require('ya-logger')
+const logger = require('ya-node-logger')
 
 // full function logger sample
 logger.initNewLogger(

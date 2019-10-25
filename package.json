@@ -1,11 +1,23 @@
 {
   "name": "ya-node-logger",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "yet another node.js logger",
   "main": "index.js",
   "scripts": {},
-  "author": "royshen12",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RoyShen12/ya-logger.git"
+  },
+  "keywords": [
+    "log",
+    "logger"
+  ],
+  "author": "Roy Shen",
+  "bugs": {
+    "url": "https://github.com/RoyShen12/ya-logger/issues"
+  },
+  "homepage": "https://github.com/RoyShen12/ya-logger#readme",
   "dependencies": {
     "chalk": "^2.4.2",
     "lodash": "^4.17.15"
