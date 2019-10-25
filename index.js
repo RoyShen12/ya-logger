@@ -11,6 +11,8 @@ const chalk = require('chalk').default
 
 const zlb = require('./ziptool')
 
+const lagecyFolder = 'lagecy-log'
+
 function timebasedFileNamer() {
   const DateObj = new Date()
   const month = DateObj.getMonth() < 9 ? ('0' + (DateObj.getMonth() + 1)) : (DateObj.getMonth() + 1)
@@ -120,7 +122,7 @@ function initNewLogger(loggerName, logfilePath, logFileNameHead, logFileNameTail
 
   if (loggersCached.has(loggerName)) return null
 
-  if (zipOldFiles) fs.existsSync(path.resolve(logfilePath, 'lagecy')) || fs.mkdirSync(path.resolve(logfilePath, 'lagecy'), { recursive: true })
+  if (zipOldFiles) fs.existsSync(path.resolve(logfilePath, lagecyFolder)) || fs.mkdirSync(path.resolve(logfilePath, lagecyFolder), { recursive: true })
   else fs.existsSync(logfilePath) || fs.mkdirSync(logfilePath, { recursive: true })
 
   filesOfLogger.set(loggerName, []) // init file record map
@@ -146,7 +148,7 @@ function initNewLogger(loggerName, logfilePath, logFileNameHead, logFileNameTail
           ])
 
           // ./log/verbose-2019-08-12.log -> ./log/lagecy/verbose-2019-08-12.log.gz
-          const destination = path.resolve(logfilePath, 'lagecy', _.trimStart(oldFileName, logfilePath) + '.gz')
+          const destination = path.resolve(logfilePath, lagecyFolder, _.trimStart(oldFileName, logfilePath) + '.gz')
           await fs.promises.writeFile(destination, gZipedOldFileBuffer)
         } catch (err) {
           dumpRawError(err, `logger, caught while old file being archived, target file symbol: ${fList}`)
