@@ -217,32 +217,6 @@ function dumpRawError(error, name, deepth = 3) {
   )
 }
 
-const initCleaning = _.once(function () {
-  const logDir = './log/'
-  const fsList = fs.readdirSync(logDir)
-  const todayFileName = timebasedFileNamer()
-
-  for (const f of fsList) {
-    if (f === 'lagecy') {
-      void 0
-    }
-    else {
-      if (f.indexOf(todayFileName) === -1 && !/.*\.gz/.test(f)) {
-
-        const buf = fs.readFileSync(logDir + f)
-        const bufZ = zlb.standardZip(buf)
-        fs.writeFileSync(`${logDir}lagecy/${f}.gz`, bufZ)
-        fs.unlinkSync(logDir + f)
-      }
-      else if (/.*\.gz/.test(f)) {
-        fs.renameSync(logDir + f, `${logDir}lagecy/${f}`)
-      }
-    }
-  }
-})
-
-initCleaning()
-
 module.exports = {
   initNewLogger,
   getLogger,
