@@ -6,14 +6,21 @@
 const logger = require('ya-logger')
 
 // full function logger sample
-logger.initNewLogger(/* logger name */'main', /* path of log file */'./log/', /* prefix of file name */'main-', /* suffix of file name */'.log', /* compress old file to gz */true, /* hook while writing log file */(type, msg) => {
-  if (msg.toString().length > 4000) {
-    console.log(logger.logLevelToColor(type)('** message too long to show on console **'))
+logger.initNewLogger(
+  /* logger name */ 'main',
+  /* path of log file */ './log/',
+  /* prefix of file name */ 'main-',
+  /* suffix of file name */ '.log',
+  /* compress old file to gz */ true,
+  /* hook while writing log file */ (type, msg) => {
+    if (msg.toString().length > 4000) {
+      console.log(logger.logLevelToColor(type)('** message too long to show on console **'))
+    }
+    else {
+      console.log(logger.logLevelToColor(type)(msg))
+    }
   }
-  else {
-    console.log(logger.logLevelToColor(type)(msg))
-  }
-})
+)
 
 const mainLogger = logger.getLogger('main')
 
